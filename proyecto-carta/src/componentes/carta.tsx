@@ -33,7 +33,7 @@ function Carta({
       <div className="p-4">
         <div className="flex justify-between items-center mb-2">
           <h3 className="text-xl font-bold text-gray-800">{nombre}</h3>
-          <span className="text-gray-500 text-sm">#{numero}</span>
+          <span className="text-blue-500 text-sm">#{numero}</span>
         </div>
 
         <div className="mb-3">
