@@ -1,13 +1,19 @@
-
-
-
-
-
 import Carta from './componentes/carta';
 import ModalCarta from './componentes/ModalCarta';
 import { useState } from 'react';
+import Nueva from './Nueva';
 
-const cartas = [
+export interface ICarta  {
+   numero: number;
+    nombre: string;
+    tipo: string;
+    ataque: number;
+    defensa: number;
+    descripcion: string;
+    imagen: string;
+}
+
+const defaultCartas :ICarta[] = [
   {
     numero: 1,
     nombre: 'Creeper',
@@ -15,8 +21,7 @@ const cartas = [
     ataque: 1000,
     defensa: 8,
     descripcion: 'Mata de una, no te confíes',
-    imagen:
-      'https://www.pngarts.com/files/10/Creeper-PNG-Picture.png',
+    imagen:'https://www.pngarts.com/files/10/Creeper-PNG-Picture.png',
   },
   {
     numero: 2,
@@ -25,8 +30,7 @@ const cartas = [
     ataque: 3,
     defensa: 7,
     descripcion: 'Rango medio, el daño depende del arco que tenga',
-    imagen:
-      'https://minecraft.wiki/images/thumb/Skeleton_Aiming_JE2_BE3.png/150px-Skeleton_Aiming_JE2_BE3.png',
+    imagen: 'https://minecraft.wiki/images/thumb/Skeleton_Aiming_JE2_BE3.png/150px-Skeleton_Aiming_JE2_BE3.png',
   },
   {
     numero: 3,
@@ -35,25 +39,22 @@ const cartas = [
     ataque: 5,
     defensa: 7,
     descripcion: 'El daño depende del arma que porte',
-    imagen:
-      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQp9G12oHwEP065-Jc_QA1G49MfV5f4AuwsFw&s',
+    imagen:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQp9G12oHwEP065-Jc_QA1G49MfV5f4AuwsFw&s',
   },
 ];
 
 function App() {
   const [descripcionSeleccionada, setDescripcionSeleccionada] = useState<string|null>(null);
+
+  const [cartas,setCartas] = useState<ICarta[]>(defaultCartas)
+
+  const onCrear= (carta: ICarta)=>{
+      setCartas([...cartas,carta])
+  }
   return (
     <div className="min-h-screen bg-[url('https://i.pinimg.com/736x/40/e3/d7/40e3d7e9b30eae60489fdb0c0fbc37ed.jpg')] bg-cover bg-no-repeat p-6">
       <h1 className="text-3xl font-bold text-center text-green-800 mb-8">
         Cartas de Minecraft
- 
- 
- 
- 
- 
- 
- 
- 
       </h1>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto hover:transition-all hover:scale-105">
@@ -65,8 +66,11 @@ function App() {
       </div>
       <ModalCarta isOpen={descripcionSeleccionada !== null} onClose={() => setDescripcionSeleccionada(null)} contenido={descripcionSeleccionada || ""} />
 
+      <div className="max-w-4xl mx-auto mt-8">
+        <h2 className="text-2xl font-bold text-green-800 mb-4">Crear nueva carta</h2>
+        <Nueva onCrear={onCrear}/>
+      </div>
     </div>
-
   );
 }
 
