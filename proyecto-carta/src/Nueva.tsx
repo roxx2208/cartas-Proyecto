@@ -8,7 +8,8 @@ const Nueva = ({onCrear}: {onCrear: (carta: ICarta) => void}) => {
         defensa: 0,
         descripcion: '',
         imagen: '',
-        ataque:0
+        ataque:0,
+        vida:0
     });
 
     return(
@@ -53,6 +54,14 @@ const Nueva = ({onCrear}: {onCrear: (carta: ICarta) => void}) => {
             onChange={(e) => setFormData({ ...formData, descripcion: e.target.value })}
             className="border border-gray-300 rounded px-3 py-2 w-full mb-4"
             />
+            <input 
+            type="number"
+            required
+            placeholder="vida"
+            value={formData.vida}
+            onChange={(e)=>setFormData({...formData, vida: Number(e.target.value)})}
+            className="border border-gray-300 rounded px-3 py-2 w-full mb-4"
+            />
             <input
             type="text"
             placeholder="https://www.pngarts.com/files/10/Creeper-PNG-Picture.png"
@@ -67,6 +76,7 @@ const Nueva = ({onCrear}: {onCrear: (carta: ICarta) => void}) => {
             Crear Carta
             </button>
             </div>
+            
     
         
     

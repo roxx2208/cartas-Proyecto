@@ -12,6 +12,7 @@ export interface ICarta  {
     defensa: number;
     descripcion: string;
     imagen: string;
+    vida: number;
 }
 
 

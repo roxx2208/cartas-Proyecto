@@ -4,6 +4,7 @@ type Props = {
   tipo: string;
   ataque: number;
   defensa: number;
+  vida: number;
   descripcion: string;
   imagen: string;
   natural?: string;
@@ -16,6 +17,7 @@ function Carta({
   descripcion,
   imagen,
   nombre,
+  vida,
   numero,
   tipo,
   natural,
@@ -51,6 +53,11 @@ function Carta({
             <div className="text-sm text-gray-600">Defensa</div>
           </div>
         </div>
+        <div className="flex gap-4 mb-3">
+          <div className="text-center">
+            <div className="text-lg font-bold text-red-600">{vida}</div>
+            <div className="text-sm text-gray-600">Vida</div>
+          </div>
 
         <p className="text-gray-700 text-sm border-t pt-3">
           {descripcion}
@@ -62,6 +69,7 @@ function Carta({
           </div>
         )}
       </div>
+    </div>
     </div>
   );
 }
