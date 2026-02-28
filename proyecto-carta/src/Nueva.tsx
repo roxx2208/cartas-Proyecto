@@ -1,5 +1,5 @@
 import { useState } from "react"; 
-import type { ICarta } from "./App";
+import type { ICarta } from "./pages/Home";
 const Nueva = ({onCrear}: {onCrear: (carta: ICarta) => void}) => {
     const [formData, setFormData] = useState<ICarta>({
         numero: 0,
@@ -17,7 +17,7 @@ const Nueva = ({onCrear}: {onCrear: (carta: ICarta) => void}) => {
             <input
             type="text"
             required
-            placeholder="creeper"
+            placeholder="mobs"
             value={formData.nombre}
             onChange={(e) => setFormData({ ...formData, nombre: e.target.value })}
             className="border border-gray-300 rounded px-3 py-2 w-full mb-4"
@@ -48,7 +48,7 @@ const Nueva = ({onCrear}: {onCrear: (carta: ICarta) => void}) => {
             />
             <input
             type="text"
-            placeholder="Coso que explota"
+            placeholder="descripcion"
             value={formData.descripcion}
             onChange={(e) => setFormData({ ...formData, descripcion: e.target.value })}
             className="border border-gray-300 rounded px-3 py-2 w-full mb-4"

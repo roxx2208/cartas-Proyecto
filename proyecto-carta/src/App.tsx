@@ -1,17 +1,7 @@
-import Carta from './componentes/carta';
-import ModalCarta from './componentes/ModalCarta';
-import { useState } from 'react';
-import Nueva from './Nueva';
-
-export interface ICarta  {
-   numero: number;
-    nombre: string;
-    tipo: string;
-    ataque: number;
-    defensa: number;
-    descripcion: string;
-    imagen: string;
-}
+import { Route, Routes } from "react-router";
+import Home, { type ICarta } from "./pages/Home";
+import Nueva from "./Nueva";
+import { useState } from "react";
 
 const defaultCartas :ICarta[] = [
   {
@@ -42,36 +32,20 @@ const defaultCartas :ICarta[] = [
     imagen:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQp9G12oHwEP065-Jc_QA1G49MfV5f4AuwsFw&s',
   },
 ];
-
 function App() {
-  const [descripcionSeleccionada, setDescripcionSeleccionada] = useState<string|null>(null);
-
   const [cartas,setCartas] = useState<ICarta[]>(defaultCartas)
-
   const onCrear= (carta: ICarta)=>{
       setCartas([...cartas,carta])
   }
+  
   return (
-    <div className="min-h-screen bg-[url('https://i.pinimg.com/736x/40/e3/d7/40e3d7e9b30eae60489fdb0c0fbc37ed.jpg')] bg-cover bg-no-repeat p-6">
-      <h1 className="text-3xl font-bold text-center text-green-800 mb-8">
-        Cartas de Minecraft
-      </h1>
+    
+    <Routes>  
+      <Route path="/" element={<Home cartas={cartas} />} />
+    <Route path = "/Nueva" element={<Nueva onCrear={onCrear} />} />
+    </Routes>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto hover:transition-all hover:scale-105">
-        {cartas.map((carta) => (
-          <Carta key={carta.numero} {...carta} 
-          onClick={()=>setDescripcionSeleccionada(carta.descripcion) }/>
-
-        ))}
-      </div>
-      <ModalCarta isOpen={descripcionSeleccionada !== null} onClose={() => setDescripcionSeleccionada(null)} contenido={descripcionSeleccionada || ""} />
-
-      <div className="max-w-4xl mx-auto mt-8">
-        <h2 className="text-2xl font-bold text-green-800 mb-4">Crear nueva carta</h2>
-        <Nueva onCrear={onCrear}/>
-      </div>
-    </div>
   );
-}
+};
 
 export default App;
