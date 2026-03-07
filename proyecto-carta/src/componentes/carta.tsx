@@ -9,6 +9,8 @@ type Props = {
   imagen: string;
   natural?: string;
   onClick?: () => void;
+  deleteCar?: () => void;
+
 };
 
 function Carta({
@@ -21,11 +23,13 @@ function Carta({
   numero,
   tipo,
   natural,
-  onClick
+  onClick,
+  deleteCar
 }: Props) {
+
   return (
     
-    <div className="w-64 bg-white rounded-lg shadow-md border border-gray-300 " onClick={onClick}   >
+    <div className="w-64 bg-white rounded-lg shadow-md border border-gray-300 "   >
       <img
         src={imagen}
         alt={nombre}
@@ -69,6 +73,14 @@ function Carta({
           </div>
         )}
       </div>
+      <button onClick={onClick}>
+        <p> ver detalle</p>
+        </button>
+        
+        <button  classname " "   onClick={deleteCar}>
+          <p>Borrar </p>
+          </button>
+
     </div>
     </div>
   );

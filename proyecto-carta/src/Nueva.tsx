@@ -75,6 +75,7 @@ const Nueva = ({onCrear}: {onCrear: (carta: ICarta) => void}) => {
             >
             Crear Carta
             </button>
+            
             </div>
             
     

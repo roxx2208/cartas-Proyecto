@@ -40,6 +40,11 @@ function App() {
   const onCrear= (carta: ICarta)=>{
       setCartas([...cartas,carta])
   }
+
+  function eliminarCarta (numero:number){
+    const nuevasCartas = cartas.filter(carta => carta.numero !== numero); 
+    setCartas(nuevasCartas);
+  }
   
   return (
     
