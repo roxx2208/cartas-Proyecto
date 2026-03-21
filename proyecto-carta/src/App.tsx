@@ -1,55 +1,60 @@
 import { Route, Routes } from "react-router";
-import Home, { type ICarta } from "./pages/Home";
+import type { ICarta } from "./componentes/index";
 import Nueva from "./Nueva";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import Home from "./pages/Home";
 
-const defaultCartas :ICarta[] = [
-  {
-    numero: 1,
-    nombre: 'Creeper',
-    tipo: 'Explosivo',
-    ataque: 1000,
-    defensa: 8,
-    vida: 8,
-    descripcion: 'Mata de una, no te confíes',
-    imagen:'https://www.pngarts.com/files/10/Creeper-PNG-Picture.png',
-  },
-  {
-    numero: 2,
-    nombre: 'Esqueleto',
-    tipo: 'Rango',
-    ataque: 3,
-    defensa: 7,
-    vida: 10,
-    descripcion: 'Rango medio, el daño depende del arco que tenga',
-    imagen: 'https://minecraft.wiki/images/thumb/Skeleton_Aiming_JE2_BE3.png/150px-Skeleton_Aiming_JE2_BE3.png',
-  },
-  {
-    numero: 3,
-    nombre: 'Zombie',
-    tipo: 'Cuerpo a cuerpo',
-    ataque: 5,
-    defensa: 7,
-    vida: 10, 
-    descripcion: 'El daño depende del arma que porte',
-    imagen:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQp9G12oHwEP065-Jc_QA1G49MfV5f4AuwsFw&s',
-  },
-];
+const API_URL = import.meta.env.VITE_EDUCA_API_URL;
+
 function App() {
-  const [cartas,setCartas] = useState<ICarta[]>(defaultCartas)
+  const [cartas,setCartas] = useState<ICarta[]>([]);
   const onCrear= (carta: ICarta)=>{
       setCartas([...cartas,carta])
   }
 
-  function eliminarCarta (numero:number){
+  function nuevasCartas (numero:number){
     const nuevasCartas = cartas.filter(carta => carta.numero !== numero); 
     setCartas(nuevasCartas);
   }
-  
+
+
+  const fetchCartas = async () => {
+    try {                              
+      console.log('Fetching cartas from backend...');
+      const response = await fetch('http://localhost:3000/cartas');
+      const data = await response.json();
+      setCartas(data);
+    } catch (error) {
+      console.error('Error fetching cartas:', error);
+    }
+  };
+
+  useEffect(() => {
+    fetchCartas();
+  }, []);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   return (
     
     <Routes>  
-      <Route path="/" element={<Home cartas={cartas} />} />
+      <Route path="/" element={<Home carta={cartas} eliminarCarta={nuevasCartas}  />} />
     <Route path = "/Nueva" element={<Nueva onCrear={onCrear} />} />
     </Routes>
 

@@ -1,19 +1,5 @@
-type Props = {
-  numero: number;
-  nombre: string;
-  tipo: string;
-  ataque: number;
-  defensa: number;
-  vida: number;
-  descripcion: string;
-  imagen: string;
-  natural?: string;
-  onClick?: () => void;
-  deleteCar?: () => void;
-
-};
-
-function Carta({
+import type { ICarta } from "../componentes/index";
+const Carta = ({
   ataque,
   defensa,
   descripcion,
@@ -22,10 +8,9 @@ function Carta({
   vida,
   numero,
   tipo,
-  natural,
   onClick,
   deleteCar
-}: Props) {
+}: ICarta) => {
 
   return (
     
@@ -67,20 +52,23 @@ function Carta({
           {descripcion}
         </p>
 
-        {natural && (
-          <div className="mt-3 pt-3 border-t">
-            <span className="text-green-600 font-medium">{natural}</span>
-          </div>
-        )}
-      </div>
-      <button onClick={onClick}>
-        <p> ver detalle</p>
-        </button>
         
-        <button  classname " "   onClick={deleteCar}>
-          <p>Borrar </p>
-          </button>
+      </div>
 
+      <div className="mt-4 flex gap-2">
+        <button
+          onClick={onClick}
+          className="flex-1 px-3 py-2 bg-blue-500 text-white rounded-lg shadow-sm hover:bg-blue-600 transition-colors"
+        >
+          Ver detalle
+        </button>
+        <button
+          onClick={deleteCar}
+          className="flex-1 px-3 py-2 bg-red-500 text-white rounded-lg shadow-sm hover:bg-red-600 transition-colors"
+        >
+          Borrar
+        </button>
+      </div>
     </div>
     </div>
   );
