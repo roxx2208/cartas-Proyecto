@@ -8,6 +8,17 @@ import { Route, Routes } from "react-router";
 
 
 
+<<<<<<< Updated upstream
+=======
+
+const Home = ({cartas}: {cartas: ICarta[]}) => {
+    const [descripcionSeleccionada, setDescripcionSeleccionada] = useState<string|null>(null);
+     function deleteCar (numero:number){
+        const nuevasCartas = cartas.filter(carta => carta.numero !== numero); 
+        setCartas(nuevasCartas);
+      }
+      
+>>>>>>> Stashed changes
 
 
 export const defaultCartas :ICarta[] = [
@@ -90,13 +101,22 @@ const Home = ({carta, eliminarCarta}: {carta: ICarta[]; eliminarCarta: (numero: 
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto hover:transition-all hover:scale-105">
         {cartas.map((carta) => (
+<<<<<<< Updated upstream
           <Carta
             key={carta.numero}
             {...carta}
             onClick={() => setDescripcionSeleccionada(carta.descripcion)}
             deleteCar={() => eliminarCarta(carta.numero)}
           />
+=======
+          <Carta key={carta.numero} {...carta} 
+          onClick={()=>setDescripcionSeleccionada(carta.descripcion) }
+          delateCar={()=> deleteCar(carta.nuemero)} 
+          />
+
+>>>>>>> Stashed changes
         ))}
+        
       </div>
       <ModalCarta isOpen={descripcionSeleccionada !== null} onClose={() => setDescripcionSeleccionada(null)} contenido={descripcionSeleccionada || ""} />
         <Link to="/Nueva" className="fixed bottom-6 right-6 bg-green-500 text-white px-4 py-2 rounded-full shadow-lg hover:bg-green-600 transition-colors">

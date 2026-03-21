@@ -13,7 +13,11 @@ function App() {
       setCartas([...cartas,carta])
   }
 
+<<<<<<< Updated upstream
   function nuevasCartas (numero:number){
+=======
+  function deleteCar (numero:number){
+>>>>>>> Stashed changes
     const nuevasCartas = cartas.filter(carta => carta.numero !== numero); 
     setCartas(nuevasCartas);
   }

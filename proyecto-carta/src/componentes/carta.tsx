@@ -52,8 +52,24 @@ const Carta = ({
           {descripcion}
         </p>
 
+<<<<<<< Updated upstream
         
       </div>
+=======
+        {natural && (
+          <div className="mt-3 pt-3 border-t">
+            <span className="text-green-600 font-medium">{natural}</span>
+          </div>
+        )}
+      </div>
+      <button onClick={onClick}>
+        <p> ver detalle</p>
+        </button>
+
+        <button onClick={deleteCar}>
+          <p>Borrar </p>
+          </button>
+>>>>>>> Stashed changes
 
       <div className="mt-4 flex gap-2">
         <button
