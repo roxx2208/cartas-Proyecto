@@ -1,10 +1,15 @@
-import { useState } from "react";
+import { useState,  } from "react";
 import Carta from "../componentes/carta";
 import ModalCarta from "../componentes/ModalCarta";
-
+import type { ICarta } from "../componentes/index";
 import { Link } from "react-router";
+import { Route, Routes } from "react-router";
 
-import type {ICarta} from "../componentes/index"; 
+
+
+
+
+
 export const defaultCartas :ICarta[] = [
   {
     numero: 1,
@@ -52,6 +57,28 @@ export const defaultCartas :ICarta[] = [
 const Home = ({carta, eliminarCarta}: {carta: ICarta[]; eliminarCarta: (numero: number) => void}) => {
   const [cartas,setCartas] = useState<ICarta[]>(defaultCartas)
     const [descripcionSeleccionada, setDescripcionSeleccionada] = useState<string|null>(null);
+    
+    function Home() {
+      const [cartas,setCartas] = useState<ICarta[]>([]);
+      const onCrear= (carta: ICarta)=>{
+          setCartas([...cartas,carta])
+      }
+    
+    
+    
+    function nuevasCartas (numero:number){
+    const nuevasCartas = cartas.filter(carta => carta.numero !== numero); 
+    setCartas(nuevasCartas);
+  }
+    return (
+    
+    <Routes>  
+      <Route path="/" element={<Home carta={cartas} eliminarCarta={nuevasCartas}  />} />
+    <Route path = "/Nueva" element={<Nueva onCrear={onCrear} />} />
+    </Routes>
+
+  );
+  
 
   
 
@@ -79,6 +106,7 @@ const Home = ({carta, eliminarCarta}: {carta: ICarta[]; eliminarCarta: (numero: 
 
 
     </div>
+    
     )
 }
 

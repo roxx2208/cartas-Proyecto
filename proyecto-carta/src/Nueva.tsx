@@ -1,5 +1,6 @@
 import { useState } from "react"; 
-import type { ICarta } from "./pages/Home";
+import type {ICarta} from "./componentes/index";
+
 const Nueva = ({onCrear}: {onCrear: (carta: ICarta) => void}) => {
     const [formData, setFormData] = useState<ICarta>({
         numero: 0,
@@ -9,7 +10,9 @@ const Nueva = ({onCrear}: {onCrear: (carta: ICarta) => void}) => {
         descripcion: '',
         imagen: '',
         ataque:0,
-        vida:0
+        vida:0,
+        onClick: () => {},
+        deleteCar: () => {}
     });
 
     return(

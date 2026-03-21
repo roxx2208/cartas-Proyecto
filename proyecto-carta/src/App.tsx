@@ -4,6 +4,7 @@ import Nueva from "./Nueva";
 import { useState, useEffect } from "react";
 import Home from "./pages/Home";
 
+
 const API_URL = import.meta.env.VITE_EDUCA_API_URL;
 
 function App() {
@@ -21,7 +22,9 @@ function App() {
   const fetchCartas = async () => {
     try {                              
       console.log('Fetching cartas from backend...');
-      const response = await fetch('http://localhost:3000/cartas');
+      const response = await fetch(`${API_URL}/card`, {headers:{
+        usersecretpasskey :"Roxel572975el"
+      } });
       const data = await response.json();
       setCartas(data);
     } catch (error) {
@@ -32,15 +35,6 @@ function App() {
   useEffect(() => {
     fetchCartas();
   }, []);
-
-
-
-
-
-
-
-
-
 
 
 
