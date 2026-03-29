@@ -19,8 +19,33 @@ export interface IapiCart{
       "defense": number,
       "lifePoints": number,
       "pictureUrl": string,
-      "attributes": {},
-      "userSecret": null,
-      "createdAt": "2023-01-01T00:00:00.000Z",
-      "updatedAt": null
+      "attributes": {tipo?: string},
+      "userSecret": string,
+      "createdAt": string,
+      "updatedAt": null | string 
 }
+
+export const toApiCardMapper = (carta : ICarta) => {
+    return {
+        name: carta.nombre,
+        description: carta.descripcion,
+        attack: Number (carta.ataque) ,
+        defense: Number (carta.defensa),
+        lifePoints: Number (carta.vida),
+        pictureUrl: carta.imagen || "https://i.pinimg.com/736x/40/e3/d7/40e3d7e9b30eae60489fdb0c0fbc37ed.jpg",
+        attributes: {tipo: carta.tipo || "Desconocido"},
+    }
+
+}
+    export const toCardApiMapper =  (apiCard : IapiCart) => ({
+    numero: parseInt(apiCard.idCard),
+    nombre: apiCard.name,
+    tipo: apiCard.attributes?.tipo || "Desconocido",
+    ataque: apiCard.attack,
+    defensa: apiCard.defense,
+    vida: apiCard.lifePoints,
+    descripcion: apiCard.description,
+    imagen: apiCard.pictureUrl, 
+    onClick: () => {},
+    deleteCar: () => {}
+});

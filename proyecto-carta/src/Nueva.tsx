@@ -3,10 +3,12 @@ import type { ICarta } from "./componentes/index";
 import { useNavigate } from "react-router"; 
 
 const Nueva = ({ onCrear }: { onCrear: (carta: ICarta) => void }) => {
+    // Hook para poder saltar de una página a otra (Navegación)
     const navigate = useNavigate(); 
     
+    // ESTADO LOCAL: Objeto que guarda temporalmente lo que el usuario escribe en los inputs
     const [formData, setFormData] = useState<ICarta>({
-        numero: Math.floor(Math.random() * 1000), 
+        numero: Math.floor(Math.random() * 1000), // Generamos un ID al azar para la nueva carta
         nombre: '',
         tipo: '',
         defensa: 0,
@@ -14,21 +16,23 @@ const Nueva = ({ onCrear }: { onCrear: (carta: ICarta) => void }) => {
         imagen: '',
         ataque: 0,
         vida: 0,
-        onClick: () => {},
+        onClick: () => {}, // Funciones vacías por defecto para cumplir con la interfaz
         deleteCar: () => {}
     });
 
+    // Función que se activa al dar clic en "Guardar Mob"
     const manejarEnvio = () => {
         
+        // VALIDACIÓN: Si el nombre está vacío, mostramos alerta y detenemos el proceso
         if(formData.nombre.trim() === "") {
             alert("¡Ponle un nombre al mob!");
             return;
         }
 
-       
+        // ENVIAR DATOS: Llamamos a la función onCrear que nos pasó el componente Padre (App)
         onCrear(formData);
 
-        
+        // NAVEGACIÓN: Una vez creada la carta, regresamos automáticamente al Home ("/")
         navigate("/"); 
     };
 
@@ -37,6 +41,7 @@ const Nueva = ({ onCrear }: { onCrear: (carta: ICarta) => void }) => {
             <h2 className="text-2xl font-bold mb-6 text-green-700">Crear Nuevo Mob de Minecraft</h2>
             
             <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-md">
+                {/* INPUT NOMBRE: Cada cambio actualiza solo la propiedad 'nombre' del estado */}
                 <label className="block text-sm font-medium text-gray-700 mb-1">Nombre del Mob</label>
                 <input
                     type="text"
@@ -46,6 +51,7 @@ const Nueva = ({ onCrear }: { onCrear: (carta: ICarta) => void }) => {
                     className="border border-gray-300 rounded px-3 py-2 w-full mb-4 focus:ring-2 focus:ring-green-500 outline-none"
                 />
 
+                {/* INPUT TIPO: Neutral, Hostil, etc. */}
                 <label className="block text-sm font-medium text-gray-700 mb-1">Tipo</label>
                 <input
                     type="text"
@@ -55,12 +61,14 @@ const Nueva = ({ onCrear }: { onCrear: (carta: ICarta) => void }) => {
                     className="border border-gray-300 rounded px-3 py-2 w-full mb-4 focus:ring-2 focus:ring-green-500 outline-none"
                 />
 
+                {/* GRID PARA ATRIBUTOS NUMÉRICOS */}
                 <div className="grid grid-cols-3 gap-2">
                     <div>
                         <label className="block text-xs font-bold text-gray-500">Ataque</label>
                         <input 
                             type="number"
                             value={formData.ataque}
+                            // Convertimos el valor de texto a número antes de guardarlo
                             onChange={(e) => setFormData({ ...formData, ataque: Number(e.target.value) })}
                             className="border border-gray-300 rounded px-3 py-2 w-full mb-4"
                         />
@@ -85,6 +93,7 @@ const Nueva = ({ onCrear }: { onCrear: (carta: ICarta) => void }) => {
                     </div>
                 </div>
 
+                {/* TEXTAREA PARA LA DESCRIPCIÓN LARGA */}
                 <label className="block text-sm font-medium text-gray-700 mb-1">Descripción</label>
                 <textarea
                     placeholder="¿Qué hace este mob?"
@@ -93,6 +102,7 @@ const Nueva = ({ onCrear }: { onCrear: (carta: ICarta) => void }) => {
                     className="border border-gray-300 rounded px-3 py-2 w-full mb-4 h-24"
                 />
 
+                {/* INPUT PARA LA IMAGEN (URL) */}
                 <label className="block text-sm font-medium text-gray-700 mb-1">URL de Imagen</label>
                 <input
                     type="text"
@@ -103,12 +113,14 @@ const Nueva = ({ onCrear }: { onCrear: (carta: ICarta) => void }) => {
                 />
 
                 <div className="flex gap-2">
+                    {/* BOTÓN DE ENVÍO: Dispara la función manejarEnvio */}
                     <button
                         onClick={manejarEnvio}
                         className="flex-1 bg-green-600 text-white font-bold px-4 py-2 rounded hover:bg-green-700 transition-colors shadow-md"
                     >
                         Guardar Mob
                     </button>
+                    {/* BOTÓN CANCELAR: Solo nos regresa al Home sin hacer nada */}
                     <button
                         onClick={() => navigate("/")}
                         className="px-4 py-2 text-gray-600 hover:text-gray-800 font-medium"
