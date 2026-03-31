@@ -3,7 +3,7 @@ import Nueva from "./Nueva";
 import Home from "./pages/Home";
 import { useState, useEffect } from "react";
 import type { IapiCart, ICarta } from "./componentes";
-import { toCardApiMapper, toApiCardMapper } from "./componentes/index";
+import { ToCardApiMapper, ToApiCardMapper } from "./componentes/index";
 
 // Obtenemos la URL de la API desde las variables de entorno
 const API_URL = import.meta.env.VITE_EDUCA_API_URL;
@@ -25,7 +25,7 @@ function App() {
       const data = await response.json() as { data: IapiCart[] };
       if (data && data.data) {
         // MAPPER: Convertimos los datos que vienen de la API al formato que usa nuestra App
-        const cartasMapper: ICarta[] = data.data.map(toCardApiMapper);
+        const cartasMapper: ICarta[] = data.data.map(ToCardApiMapper);
         setCartas(cartasMapper); // Guardamos las cartas en el estado
       }
     } catch (error) {
@@ -37,7 +37,7 @@ function App() {
   const onCrear = async (nuevaCarta: ICarta) => {
     try {
       // Convertimos los datos de nuestra App al formato que espera la API
-      const apiCard = toApiCardMapper(nuevaCarta);
+      const apiCard = ToApiCardMapper(nuevaCarta);
       const response = await fetch(`${API_URL}/card`, {
         method: 'POST', // Método POST para crear nuevos registros
         headers: {
@@ -86,7 +86,7 @@ function App() {
           'Content-Type': 'application/json',
           'usersecretpasskey': "Roxe572975EL"
         },
-        body: JSON.stringify(toApiCardMapper(carta)) // Enviamos los datos actualizados
+        body: JSON.stringify(ToApiCardMapper(carta)) // Enviamos los datos actualizados
       });
 
       if (response.ok) {

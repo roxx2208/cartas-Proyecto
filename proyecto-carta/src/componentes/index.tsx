@@ -25,7 +25,7 @@ export interface IapiCart{
       "updatedAt": null | string 
 }
 
-export const toApiCardMapper = (carta : ICarta) => {
+export const ToApiCardMapper = (carta : ICarta) => {
     return {
         name: carta.nombre,
         description: carta.descripcion,
@@ -37,7 +37,7 @@ export const toApiCardMapper = (carta : ICarta) => {
     }
 
 }
-    export const toCardApiMapper =  (apiCard : IapiCart) => ({
+    export const ToCardApiMapper =  (apiCard : IapiCart) => ({
     numero: parseInt(apiCard.idCard),
     nombre: apiCard.name,
     tipo: apiCard.attributes?.tipo || "Desconocido",
