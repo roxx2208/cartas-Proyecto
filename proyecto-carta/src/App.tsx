@@ -4,6 +4,9 @@ import Home from "./pages/Home";
 import { useState, useEffect } from "react";
 import type { IapiCart, ICarta } from "./componentes";
 import { ToCardApiMapper, ToApiCardMapper } from "./componentes/index";
+import SeleccionarCartas from "./componentes/SeleccionarCartas";
+
+
 
 // Obtenemos la URL de la API desde las variables de entorno
 const API_URL = import.meta.env.VITE_EDUCA_API_URL;
@@ -117,9 +120,23 @@ function App() {
             onEditar={onEditar} 
           />
         } 
-      /> 
+      />
+      <Route
+         path="/Seleccionar-Cartas" element={<SeleccionarCartas mazo={cartas} />}  />
+     
+
+
+        
+      
+
+        
+        
+
+
+
       <Route path="/Nueva" element={<Nueva onCrear={onCrear} />} />
     </Routes>
+
   );
 }
 

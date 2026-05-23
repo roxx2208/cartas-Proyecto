@@ -7,6 +7,7 @@ export interface ICarta {
   vida: number;
   descripcion: string;
   imagen: string;
+  idCard: number;
   onClick: () => void;
   deleteCar: () => void;
 
